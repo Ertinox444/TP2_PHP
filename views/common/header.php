@@ -6,10 +6,11 @@
     <title>Mini MVC Sample</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
     <link rel="stylesheet" href="./public/style/main.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
 </head>
 
-<body class="<?= isset($_GET['id']) ? 'brick' : '' ?>">
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+<body class="<?= isset($_GET['id']) ? 'brick' : '' ?> bg-dark">
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark ">
     <div class="container-fluid">
         <a class="navbar-brand" href="/">Mini MVC Sample</a>
         <ul class="nav nav-pills">

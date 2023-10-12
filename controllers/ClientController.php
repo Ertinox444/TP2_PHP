@@ -19,12 +19,14 @@ class ClientController extends WebController
         
         $liste = $this->clientModel->liste();
 
-        
-
-            
             return Template::render("views/liste/client.php", array('liste' => $liste));
-            
-       
 
+    }
+
+    function recherche($chaine){
+
+        $recherche = $this->clientModel->recherche($chaine);
+
+        return Template::render("views/liste/client.php", array('liste'=> $recherche));
     }
 }

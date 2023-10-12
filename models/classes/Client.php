@@ -43,6 +43,8 @@ class Client
      */
     public function generalInfo(): string
     {
+        
+
         return join(",", array_filter([$this->id, $this->nom, $this->prenom]));
     }
 
@@ -54,6 +56,8 @@ class Client
     {
         return join(",", array_filter([$this->email, $this->telephone]));
     }
+
+    
 
     /**
      * @return string

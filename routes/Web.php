@@ -20,6 +20,7 @@ class Web
         Route::Add('/exemple2/{parametre}', [$main, 'exemple']);
         Route::Add('/client/{id}', [$main, 'client']);
         Route::Add('/', [$clientControleur, 'listeClient']);
+        Route::Add('/{chaine}',[$clientControleur, 'recherche']);
         
 
         // Appel la fonction inline dans le routeur.
