@@ -1,42 +1,51 @@
 
 <div>
-<form action="./liste" method="post" class="add">
+<form action="." method="get" class="add">
 <i class="bi bi-search"></i>
-<input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+<input class="form-control mr-sm-2" type="search" name="chaine" placeholder="Search" aria-label="Search">
+<tr><span style="color:white">Ligne par page : </span><input name=amount type="number" min="0" max="1000" value="500"/>
+<input type="number" id="currentPage" name="page" value="0" />
+<button type="button" id="prevPage"><i class="bi bi-caret-left-square"></i></button>
+<button type="button" id="nextPage"><i class="bi bi-caret-right-square"></i></button>
+
+<button type="submit">Search</button>
 </form>
 </div>
 
 
 <div class="card border rounded">
-        <div class="card-body">
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>Nom</th>
-                        <th>Prénom</th>
-                        <th>Téléphone</th>
-                        <th>Email</th>
-                        <th><i class="bi bi-person-add"></i><button type="button">Créer un client</button> </th>
-                    </tr>
-                </thead>
-                <tbody>
-                   <?php 
-                   foreach ($liste as $client){
-                        echo "<tr>";
-                        echo "<td>".$client->getId()."</td>";
-                        echo "<td>".$client->getNom()."</td>";
-                        echo "<td>".$client->getPrenom()."</td>";
-                        echo "<td>".$client->getTelephone()."</td>";
-                        echo "<td>".$client->getEmail()."</td>";
-                        echo "<td><i class='bi bi-arrow-right-circle'></i></td>";
-                        echo "</tr>";
-                   }
+    <div class="card-body">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Nom</th>
+                    <th>Prénom</th>
+                    <th>Téléphone</th>
+                    <th>Email</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+            <?php foreach ($liste as $client): ?>
+    <tr>
+        <td><?= $client->getId() ?></td>
+        <td><?= $client->getNom() ?></td>
+        <td><?= $client->getPrenom() ?></td>
+        <td><?= $client->getTelephone() ?></td>
+        <td><?= $client->getEmail() ?></td>
+        <td>
+            <a href="http://localhost/TP2_PHP/fiche/<?= $client->getId() ?>" class="btn btn-primary">
+                <i class="bi bi-person"></i> Voir la fiche
+            </a>
+        </td>
+    </tr>
+<?php endforeach; ?>
 
-                   ?>
 
-                   <tr>Ligne par page : <input type="number" min="0" max="10" /><button type="button"><i class="bi bi-caret-left-square"></i></button><button type="button"><i class="bi bi-caret-right-square"></i></button></tr>
-                </tbody>
-            </table>
-        </div>
+
+                      
+            </tbody>
+        </table>
     </div>
+</div>

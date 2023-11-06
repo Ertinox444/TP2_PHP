@@ -4,6 +4,7 @@ namespace models;
 
 use models\base\SQL;
 use models\classes\Client;
+use models\classes\Contact;
 
 
 class ClientsModele extends SQL
@@ -29,6 +30,7 @@ class ClientsModele extends SQL
         return $stmt->fetchAll(\PDO::FETCH_CLASS, Client::class);
     }
 
+
     /**
      * Retourne une liste de client correspondant au critère de recherche
      * @param string $keyword
@@ -36,15 +38,16 @@ class ClientsModele extends SQL
      * @param int $page
      * @return Client[]
      */
-    public function recherche(string $keyword = "", int $limit = PHP_INT_MAX, int $page = 0): array
+    public function recherche(string $chaine, int $limit = PHP_INT_MAX, int $page = 0): array
     {
         $query = "SELECT * FROM client WHERE nom LIKE :nom OR prenom like :prenom OR email like :email LIMIT :limit,:offset;";
-
+        
+  
         $stmt = SQL::getPdo()->prepare($query);
         $stmt->execute([
-            ":nom" => "%$keyword%",
-            ":prenom" => "%$keyword%",
-            ":email" => "%$keyword%",
+            ":nom" => "%$chaine%",
+            ":prenom" => "%$chaine%",
+            ":email" => "%$chaine%",
             ":limit" => $limit * $page,
             ":offset" => $limit
         ]);
@@ -66,11 +69,25 @@ class ClientsModele extends SQL
         return $this->getPdo()->lastInsertId();
     }
 
-    public function getByClientId($clientId): Client{
-        $query = "SELECT * FROM client WHERE id = ?";
+    public function getByClientId($clientId): Client {
+       
+        $query = "SELECT * FROM client WHERE id = $clientId";
         $stmt = SQL::getPdo()->prepare($query);
-        $stmt->execute([$clientId]);
-        $stmt->setFetchMode(\PDO::FETCH_CLASS, Client::class);
-        return $stmt->fetch();
+        $stmt->execute();
+        
+     
+    
+        return $stmt->fetchObject(Client::class);
     }
+
+    // Dans la classe ClientsModele
+public function lesContacts($clientId)
+{
+    $query = "SELECT * FROM contacts WHERE client_id = ?";
+    $stmt = SQL::getPdo()->prepare($query);
+    $stmt->execute([$clientId]);
+    return $stmt->fetchAll(\PDO::FETCH_CLASS, Contact::class);
+}
+
+    
 }
