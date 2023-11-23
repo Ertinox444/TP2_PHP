@@ -38,14 +38,14 @@ class ClientController extends WebController
     }
 
     public function fiche($id)
-    {
-        // À compléter avec les bons appels de méthode.
-        $client = $this->clientModel->getByClientId($id);
-        $contacts = $this->clientModel->lesContacts($id);
-  
-        // Affichez le client dans la vue
-        return Template::render("views/fiche/client.php", ["client" => $client, "contacts" => $contacts]);
-    }
+{
+    var_dump($id); // Ajoutez cette ligne pour vérifier l'ID
+    $client = $this->clientModel->getByClientId($id);
+    $contacts = $this->clientModel->lesContacts($id);
+
+    // Affichez le client dans la vue
+    return Template::render("views/fiche/client.php", ["client" => $client, "contacts" => $contacts]);
+}
 
     
     

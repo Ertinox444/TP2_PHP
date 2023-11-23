@@ -11,6 +11,7 @@ class ContactModel extends SQL
     {
         parent::__construct('contact', 'id');
     }
+    
 
     /**
      * Liste les contacts d'un client
@@ -32,7 +33,7 @@ class ContactModel extends SQL
      */
     public function creerContactClient(Contact $unContact): string
     {
-        $query = "INSERT INTO contact (id, nom_contact, numero, email, clientId) VALUE (NULL, ?, ?, ?, ?)";
+        $query =  "INSERT INTO contacts (id, nom_contact, numero, email, clientId) VALUES (NULL, ?, ?, ?, ?)"; 
         $stmt = SQL::getPdo()->prepare($query);
         $stmt->execute([$unContact->getNomContact(), $unContact->getNumero(), $unContact->getEmail(), $unContact->getClientId()]);
         return $this->getPdo()->lastInsertId();
